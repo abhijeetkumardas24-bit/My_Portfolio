@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
@@ -11,7 +11,9 @@ const navLinks = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     // Always force dark mode
@@ -19,21 +21,54 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          setScrolled(currentScrollY > 40);
+
+          // Auto-hide only on mobile screens (< 768px) to maximize reading space
+          if (window.innerWidth < 768) {
+            if (currentScrollY < 60) {
+              setVisible(true);
+            } else if (currentScrollY > lastScrollYRef.current + 8) {
+              // Scrolling DOWN: slide navbar up so it doesn't cover section headers
+              if (!mobileMenuOpen) {
+                setVisible(false);
+              }
+            } else if (currentScrollY < lastScrollYRef.current - 8) {
+              // Scrolling UP: reveal navbar smoothly
+              setVisible(true);
+            }
+          } else {
+            // Desktop: always keep visible
+            setVisible(true);
+          }
+
+          lastScrollYRef.current = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
 
   return (
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
-          scrolled ? 'py-4' : 'py-8'
+        animate={{ 
+          y: visible ? 0 : -100, 
+          opacity: visible ? 1 : 0 
+        }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex justify-center ${
+          scrolled ? 'py-2.5 sm:py-4' : 'py-3.5 sm:py-8'
         }`}
       >
         <div 
@@ -91,7 +126,7 @@ const Navbar = () => {
           {/* Mobile Menu Toggle */}
           <div className="flex items-center gap-3 md:hidden z-50">
             <button 
-              className="p-2 text-[var(--text-primary)]"
+              className="p-2 text-[var(--text-primary)] active:scale-95 transition-transform"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Menu"
             >
@@ -108,13 +143,13 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-[var(--bg-void)] text-[var(--text-primary)] flex flex-col items-center justify-center gap-8 pt-20"
+            className="fixed inset-0 z-40 bg-[var(--bg-void)]/95 backdrop-blur-xl text-[var(--text-primary)] flex flex-col items-center justify-center gap-7 pt-16 px-6"
           >
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-4xl font-bold tracking-tighter hover:text-[var(--accent-primary)] transition-colors"
+                className="text-3xl font-black tracking-tight hover:text-[var(--accent-primary)] active:scale-95 transition-all"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}
@@ -122,7 +157,7 @@ const Navbar = () => {
             ))}
             <a 
               href="#contact" 
-              className="text-xl font-bold mt-8 border border-[var(--border-hairline)] bg-[var(--accent-primary)] text-white px-8 py-4 rounded-full"
+              className="text-base font-bold mt-4 border border-[var(--border-hairline)] bg-[var(--accent-primary)] text-white px-8 py-3.5 rounded-full active:scale-95 transition-transform"
               onClick={() => setMobileMenuOpen(false)}
             >
               LET'S TALK ↗

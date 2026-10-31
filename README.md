@@ -16,7 +16,7 @@ An interactive, high-performance developer portfolio built with **React 19**, **
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-14.x-FF0055?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 [![Lenis](https://img.shields.io/badge/Lenis-Smooth_Scroll-black?style=for-the-badge)](https://lenis.darkroom.engineering/)
 
-[LinkedIn](https://www.linkedin.com/in/abhijeet-kumar-das-0b4501324) • [GitHub](https://github.com/abhijeetkumardas24-bit)
+[🌐 Live Portfolio](https://abhijeetkumardas7.vercel.app/) • [LinkedIn](https://www.linkedin.com/in/abhijeet-kumar-das-0b4501324) • [GitHub](https://github.com/abhijeetkumardas24-bit)
 
 </div>
 

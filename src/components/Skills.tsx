@@ -26,7 +26,7 @@ const skillCategories: SkillCategory[] = [
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10]">
+    <section id="skills" className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10] scroll-mt-24 sm:scroll-mt-28">
       {/* ─── Global Full-Width Technical Blueprint Grid & Ambient Glow ─── */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none select-none"

@@ -179,7 +179,7 @@ const Certificates = () => {
   return (
     <section
       id="certificates"
-      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10]"
+      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10] scroll-mt-24 sm:scroll-mt-28"
     >
       {/* ─── Academic & Verification Technical Line-Art Background ─── */}
       <svg
@@ -594,20 +594,20 @@ const Certificates = () => {
         {/* Row: Prev button + CardStack + Next button */}
         <div className="w-full flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
 
-          {/* Prev Button */}
+          {/* Desktop/Tablet Prev Button */}
           <button
             onClick={() => navigate('prev')}
             aria-label="Previous certificate"
-            className="flex-shrink-0 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full
+            className="hidden sm:flex flex-shrink-0 items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full
               bg-[var(--bg-elevated)] border border-[var(--border-hairline)]
               text-[var(--text-secondary)] hover:bg-[var(--accent-primary)] hover:text-white hover:border-[var(--accent-primary)]
-              transition-all duration-200 shadow-md z-40 cursor-pointer"
+              transition-all duration-200 shadow-md z-40 cursor-pointer active:scale-95"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
 
           {/* CardStack Container */}
-          <div className="flex-1 max-w-3xl min-w-0 relative py-2 px-1 sm:px-2 md:px-4">
+          <div className="flex-1 max-w-3xl min-w-0 relative py-2 px-0 sm:px-2 md:px-4 w-full">
             <div className="grid grid-cols-1 grid-rows-1 items-stretch">
               {certificatesList.map((cert, i) => {
                 const offset = getOffset(i, activeIndex, total);
@@ -621,6 +621,17 @@ const Certificates = () => {
                       gridArea: '1 / 1 / 2 / 2',
                       willChange: 'transform, opacity',
                       zIndex: style.zIndex,
+                    }}
+                    drag={isActive ? 'x' : false}
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.22}
+                    onDragEnd={(_, info) => {
+                      if (!isActive) return;
+                      if (info.offset.x < -35 || info.velocity.x < -250) {
+                        navigate('next');
+                      } else if (info.offset.x > 35 || info.velocity.x > 250) {
+                        navigate('prev');
+                      }
                     }}
                     animate={{
                       x: style.x,
@@ -649,7 +660,7 @@ const Certificates = () => {
                     <div className="flex flex-col md:flex-row">
 
                       {/* ── Left: Text Content ── */}
-                      <div className="flex flex-col gap-4 p-6 md:p-7 flex-1 justify-between min-w-0">
+                      <div className="flex flex-col gap-4 p-5 sm:p-6 md:p-7 flex-1 justify-between min-w-0">
 
                         {/* Header */}
                         <div className="flex flex-col gap-1.5">
@@ -708,7 +719,7 @@ const Certificates = () => {
                               setSelectedCert(cert);
                             }}
                             tabIndex={isActive ? 0 : -1}
-                            className={`inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full bg-[var(--accent-primary)]/15 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)] hover:text-white transition-all duration-200 cursor-pointer shadow-sm ${
+                            className={`inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-full bg-[var(--accent-primary)]/15 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)] hover:text-white active:scale-95 transition-all duration-200 cursor-pointer shadow-sm ${
                               !isActive ? 'pointer-events-none' : ''
                             }`}
                           >
@@ -721,7 +732,7 @@ const Certificates = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             tabIndex={isActive ? 0 : -1}
-                            className={`inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-200 group/link ${
+                            className={`inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] active:scale-95 transition-all duration-200 group/link ${
                               !isActive ? 'pointer-events-none' : ''
                             }`}
                           >
@@ -743,7 +754,7 @@ const Certificates = () => {
                         }}
                         className="md:w-[42%] flex-shrink-0 border-t md:border-t-0 md:border-l
                           border-[var(--border-hairline)] bg-[var(--bg-elevated)]
-                          flex items-center justify-center p-5 md:p-6 min-h-[200px]
+                          flex items-center justify-center p-4 sm:p-5 md:p-6 min-h-[190px] sm:min-h-[200px]
                           cursor-pointer group/img relative overflow-hidden"
                         title="Click to view full certificate"
                       >
@@ -752,7 +763,7 @@ const Certificates = () => {
                           alt={`${cert.title} Certificate - Issued by ${cert.issuer}`}
                           width={800}
                           height={530}
-                          className="w-full h-full max-h-[260px] object-contain rounded-lg
+                          className="w-full h-full max-h-[240px] sm:max-h-[260px] object-contain rounded-lg
                             drop-shadow-lg transition-transform duration-300 group-hover/img:scale-[1.03]"
                           loading="lazy"
                           draggable={false}
@@ -774,22 +785,57 @@ const Certificates = () => {
             </div>
           </div>
 
-          {/* Next Button */}
+          {/* Desktop/Tablet Next Button */}
           <button
             onClick={() => navigate('next')}
             aria-label="Next certificate"
-            className="flex-shrink-0 flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full
+            className="hidden sm:flex flex-shrink-0 items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full
               bg-[var(--bg-elevated)] border border-[var(--border-hairline)]
               text-[var(--text-secondary)] hover:bg-[var(--accent-primary)] hover:text-white hover:border-[var(--accent-primary)]
-              transition-all duration-200 shadow-md z-40 cursor-pointer"
+              transition-all duration-200 shadow-md z-40 cursor-pointer active:scale-95"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
-
         </div>
 
-        {/* Dot indicators */}
-        <div className="w-full flex justify-center gap-2 mt-6">
+        {/* ── Mobile Navigation Controls: Touch Prev, Active Indicators, Next ── */}
+        <div className="flex sm:hidden items-center justify-center gap-4 mt-6 z-40">
+          <button
+            type="button"
+            onClick={() => navigate('prev')}
+            aria-label="Previous certificate"
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--bg-elevated)] border border-[var(--border-hairline)] text-[var(--text-secondary)] active:scale-90 transition-all shadow-md"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[var(--bg-card)] border border-[var(--border-hairline)]">
+            {certificatesList.map((_, dotIdx) => (
+              <button
+                key={dotIdx}
+                onClick={() => setActiveIndex(dotIdx)}
+                aria-label={`Go to certificate ${dotIdx + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  dotIdx === activeIndex
+                    ? 'w-6 bg-[var(--accent-primary)]'
+                    : 'w-2 bg-[var(--border-active)] hover:bg-[var(--text-dim)]'
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => navigate('next')}
+            aria-label="Next certificate"
+            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--bg-elevated)] border border-[var(--border-hairline)] text-[var(--text-secondary)] active:scale-90 transition-all shadow-md"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Desktop/Tablet Dot indicators */}
+        <div className="hidden sm:flex w-full justify-center gap-2 mt-6">
           {certificatesList.map((c, i) => (
             <button
               key={c.id}

@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 md:py-36 w-full border-t border-[var(--border-hairline)] relative">
+    <section id="contact" className="py-24 md:py-36 w-full border-t border-[var(--border-hairline)] relative scroll-mt-24 sm:scroll-mt-28">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24">
         <div className="flex flex-col items-start text-left gap-8 max-w-4xl w-full relative z-10">
         
@@ -43,7 +43,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap items-center gap-5 mt-4"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-5 mt-4 w-full sm:w-auto"
         >
           {/* LinkedIn Button */}
           <a 
@@ -51,7 +51,7 @@ const Contact = () => {
             target="_blank" 
             rel="noopener noreferrer"
             aria-label="Connect with Abhijeet Kumar Das on LinkedIn"
-            className="group flex items-center justify-center gap-2.5 bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] text-white px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-[var(--accent-primary)]/25 hover:scale-105 active:scale-95 transition-all duration-300"
+            className="group flex items-center justify-center gap-2.5 bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] text-white px-8 py-4 rounded-full font-bold text-base shadow-lg shadow-[var(--accent-primary)]/25 hover:scale-105 active:scale-95 transition-all duration-300 text-center"
           >
             <span>LinkedIn Profile</span>
             <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -63,7 +63,7 @@ const Contact = () => {
             target="_blank" 
             rel="noopener noreferrer"
             aria-label="View Abhijeet Kumar Das's repositories on GitHub"
-            className="group flex items-center justify-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-hairline)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] px-8 py-4 rounded-full font-bold text-base shadow-sm hover:scale-105 active:scale-95 transition-all duration-300"
+            className="group flex items-center justify-center gap-2.5 bg-[var(--bg-card)] border border-[var(--border-hairline)] hover:border-[var(--accent-primary)] text-[var(--text-primary)] hover:text-[var(--accent-primary)] px-8 py-4 rounded-full font-bold text-base shadow-sm hover:scale-105 active:scale-95 transition-all duration-300 text-center"
           >
             <span>GitHub Profile</span>
             <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

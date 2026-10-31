@@ -54,17 +54,6 @@ const IntroPreloader: React.FC<IntroPreloaderProps> = ({ onComplete, onReveal })
     onComplete();
   }, [onComplete, onReveal]);
 
-  // Handle ESC key to skip
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        handleFinish();
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [handleFinish]);
-
   // Blinking cursor cycle
   useEffect(() => {
     const cursorInterval = setInterval(() => {
@@ -264,19 +253,6 @@ const IntroPreloader: React.FC<IntroPreloaderProps> = ({ onComplete, onReveal })
           />
         ))}
       </div>
-
-      {/* ── Top-Right: Minimal Skip Button ── */}
-      <button
-        type="button"
-        onClick={handleFinish}
-        aria-label="Skip introductory animation"
-        className="absolute top-6 right-6 sm:top-8 sm:right-8 z-50 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase text-[#D9C6AA]/70 hover:text-[#F4F2EC] bg-white/[0.03] hover:bg-white/[0.07] border border-[#D9C6AA]/20 hover:border-[#D9C6AA]/60 transition-all duration-200 backdrop-blur-md cursor-pointer group shadow-sm hover:shadow-[0_0_15px_rgba(217,198,170,0.25)]"
-      >
-        <span>Skip</span>
-        <span className="text-[10px] opacity-60 group-hover:opacity-100 font-mono">
-          [ESC]
-        </span>
-      </button>
 
       {/* ── Center Content Wrapper (Text + Wavy Circle) ── */}
       <motion.div

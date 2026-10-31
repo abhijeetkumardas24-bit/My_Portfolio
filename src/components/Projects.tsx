@@ -218,34 +218,34 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden"
+      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden scroll-mt-24 sm:scroll-mt-28"
     >
 
       {/* ── Exact geometric decorators matching the reference mockup ─────── */}
       {/* Top Left */}
-      <Crosshair  size={14} opacity={0.35} style={{ top: '10%', left: '3%' }} />
-      <TinySquare size={8}  filled color="#e2b383" style={{ top: '18%', left: '2%', opacity: 0.85 }} />
+      <Crosshair size={14} opacity={0.35} style={{ top: '10%', left: '3%' }} />
+      <TinySquare size={8} filled color="#e2b383" style={{ top: '18%', left: '2%', opacity: 0.85 }} />
 
       {/* Near Title */}
       <TinySquare size={13} color="#2563eb" style={{ top: '13%', left: '29%', opacity: 0.7 }} />
-      <Crosshair  size={15} opacity={0.35} style={{ top: '24%', left: '33%' }} />
+      <Crosshair size={15} opacity={0.35} style={{ top: '24%', left: '33%' }} />
 
       {/* Between Code & Chart Preview Boxes */}
-      <Crosshair  size={15} opacity={0.35} style={{ top: '11%', left: '62%' }} />
-      <TinySquare size={8}  filled color="#2563eb" style={{ top: '16%', left: '66%', opacity: 0.85 }} />
+      <Crosshair size={15} opacity={0.35} style={{ top: '11%', left: '62%' }} />
+      <TinySquare size={8} filled color="#2563eb" style={{ top: '16%', left: '66%', opacity: 0.85 }} />
       <TinySquare size={11} color="#c59b6d" style={{ top: '25%', left: '60%', opacity: 0.65 }} />
 
       {/* Left Margin flanking cards */}
-      <TinySquare size={8}  filled color="#2563eb" style={{ top: '35%', left: '2%', opacity: 0.85 }} />
+      <TinySquare size={8} filled color="#2563eb" style={{ top: '35%', left: '2%', opacity: 0.85 }} />
       <TinySquare size={13} color="#c59b6d" style={{ top: '56%', left: '4%', opacity: 0.65 }} />
-      <Crosshair  size={15} opacity={0.35} style={{ top: '68%', left: '1.5%' }} />
-      <TinySquare size={7}  filled color="#2563eb" style={{ top: '88%', left: '10%', opacity: 0.75 }} />
+      <Crosshair size={15} opacity={0.35} style={{ top: '68%', left: '1.5%' }} />
+      <TinySquare size={7} filled color="#2563eb" style={{ top: '88%', left: '10%', opacity: 0.75 }} />
 
       {/* Right Margin flanking cards */}
-      <TinySquare size={9}  color="#e2b383" style={{ top: '35%', right: '2.5%', opacity: 0.7 }} />
-      <Crosshair  size={15} opacity={0.35} style={{ top: '44%', right: '4%' }} />
-      <TinySquare size={8}  filled color="#e2b383" style={{ top: '78%', right: '4%', opacity: 0.85 }} />
-      <Crosshair  size={15} opacity={0.35} style={{ top: '86%', right: '7%' }} />
+      <TinySquare size={9} color="#e2b383" style={{ top: '35%', right: '2.5%', opacity: 0.7 }} />
+      <Crosshair size={15} opacity={0.35} style={{ top: '44%', right: '4%' }} />
+      <TinySquare size={8} filled color="#e2b383" style={{ top: '78%', right: '4%', opacity: 0.85 }} />
+      <Crosshair size={15} opacity={0.35} style={{ top: '86%', right: '7%' }} />
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 lg:px-24 flex flex-col items-start relative z-10">
@@ -255,7 +255,7 @@ const Projects = () => {
           {/* Column 1: Heading & Navigation */}
           <div className="flex flex-col items-start text-left justify-between h-full">
             <div>
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -263,7 +263,7 @@ const Projects = () => {
               >
                 FEATURED WORK
               </motion.span>
-              <motion.h2 
+              <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -305,7 +305,7 @@ const Projects = () => {
             <ChevronLeft className="w-5 h-5" />
           </button>
 
-          <div 
+          <div
             ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto pb-8 pt-2 scroll-smooth no-scrollbar snap-x snap-mandatory cursor-grab active:cursor-grabbing -mx-4 px-4 sm:mx-0 sm:px-0"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -351,9 +351,9 @@ const Projects = () => {
 
                   {/* Action Links */}
                   <div className="flex items-center gap-5 text-xs sm:text-sm font-bold text-[var(--text-primary)]">
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View ${project.title} on GitHub`}
                       className="hover:text-[var(--accent-primary)] flex items-center gap-1 transition-colors"

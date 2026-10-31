@@ -39,7 +39,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10]"
+      className="py-24 md:py-32 w-full border-t border-[var(--border-hairline)] relative overflow-hidden bg-[#080B10] scroll-mt-24 sm:scroll-mt-28"
     >
       {/* ── Background Gold Curves & Ambient Glowing Nodes (Exact Mockup Match) ── */}
       <svg
