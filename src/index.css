@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Caveat:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-handwriting: "Caveat", cursive, sans-serif;
+  --color-void: var(--bg-void);
+  --color-card: var(--bg-card);
+  --color-elevated: var(--bg-elevated);
+  --color-floating: var(--bg-floating);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-dim: var(--text-dim);
+
+  --color-border-hairline: var(--border-hairline);
+  --color-border-active: var(--border-active);
+
+  --color-cta-blue: var(--accent-primary);
+  --color-cta-hover: var(--accent-hover);
+  --color-live-green: var(--live-green);
+  --color-line-art: var(--decorative-line);
+}
+
+/* ==========================================================================
+   DESIGN SYSTEM TOKENS — DARK MODE ONLY
+   ========================================================================== */
+:root {
+  /* Dark Mode Palette */
+  --bg-void: #080B10;
+  --bg-card: #11161D;
+  --bg-elevated: #11161D;
+  --bg-floating: #11161D;
+  --bg-primary: #080B10;
+
+  --text-primary: #F4F2EC;
+  --text-secondary: #A5B7CF;
+  --text-dim: #A5B7CF;
+
+  --border-hairline: #28313D;
+  --border-active: #384556;
+
+  --accent-primary: #3C91F6;
+  --accent-hover: #297fd9;
+  --live-green: #22c55e;
+  --decorative-line: #D9C6AA;
+
+  /* Grid & Spotlight Tokens */
+  --dot-passive: #28313D;
+  --dot-active: #3C91F6;
+  --spotlight-glow: rgba(60, 145, 246, 0.15);
+
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    @apply antialiased overflow-x-hidden;
+  }
+
+  input, textarea, select {
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    border-color: var(--border-hairline);
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent-primary);
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 1px;
+  }
+}
+
+/* Hide scrollbar for cleaner look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-active);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ==========================================================================
+   REALISTIC GLASSMORPHISM
+   ========================================================================== */
+.realistic-glass {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 35%,
+    rgba(10, 15, 23, 0.58) 100%
+  );
+  backdrop-filter: blur(24px) saturate(190%) brightness(108%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%) brightness(108%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 
+    0 24px 48px -12px rgba(0, 0, 0, 0.75),
+    0 8px 16px -4px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+

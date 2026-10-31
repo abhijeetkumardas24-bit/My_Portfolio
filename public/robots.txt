@@ -1,0 +1,7 @@
+# robots.txt for Abhijeet Kumar Das Portfolio
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://abhijeetkumardas.vercel.app/sitemap.xml
+

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 36" width="320" height="36" fill="none">
+  <style>
+    .title {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.05em;
+      fill: #3C91F6;
+    }
+  </style>
+  <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" class="title">
+    AI &amp; GenAI Engineer
+  </text>
+</svg>
+
