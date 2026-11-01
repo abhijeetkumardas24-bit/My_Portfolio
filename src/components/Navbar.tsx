@@ -41,7 +41,7 @@ const Navbar = () => {
         <div 
           className={`flex items-center justify-between px-6 md:px-8 transition-all duration-500 relative ${
             scrolled 
-              ? 'w-[95%] max-w-[1240px] rounded-full py-3 realistic-glass' 
+              ? 'w-[95%] max-w-[1240px] rounded-full py-3 realistic-glass backdrop-blur-xl' 
               : 'w-full max-w-[1440px] bg-transparent py-2 border border-transparent'
           }`}
         >
