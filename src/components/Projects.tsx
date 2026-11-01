@@ -283,13 +283,13 @@ const Projects = () => {
             </div>
           </div>
 
-          {/* Column 2: Code Editor Preview Box (hidden on smaller screens, matching reference on lg+) */}
-          <div className="hidden lg:block">
+          {/* Column 2: Code Editor Preview Box */}
+          <div className="hidden md:block">
             <CodePreviewBox />
           </div>
 
-          {/* Column 3: Analytics / Chart Preview Box (hidden on smaller screens, matching reference on lg+) */}
-          <div className="hidden lg:block">
+          {/* Column 3: Analytics / Chart Preview Box (now visible on mobile as well!) */}
+          <div className="block">
             <ChartPreviewBox />
           </div>
         </div>

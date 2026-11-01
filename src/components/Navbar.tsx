@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 
@@ -11,9 +11,7 @@ const navLinks = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [visible, setVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
     // Always force dark mode
@@ -21,52 +19,21 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    let ticking = false;
-
     const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          setScrolled(currentScrollY > 40);
-
-          // Auto-hide only on mobile screens (< 768px) to maximize reading space
-          if (window.innerWidth < 768) {
-            if (currentScrollY < 60) {
-              setVisible(true);
-            } else if (currentScrollY > lastScrollYRef.current + 8) {
-              // Scrolling DOWN: slide navbar up so it doesn't cover section headers
-              if (!mobileMenuOpen) {
-                setVisible(false);
-              }
-            } else if (currentScrollY < lastScrollYRef.current - 8) {
-              // Scrolling UP: reveal navbar smoothly
-              setVisible(true);
-            }
-          } else {
-            // Desktop: always keep visible
-            setVisible(true);
-          }
-
-          lastScrollYRef.current = currentScrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
+      // Toggle floating glass capsule when scrolling past 30px
+      setScrolled(window.scrollY > 30);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [mobileMenuOpen]);
+  }, []);
 
   return (
     <>
       <motion.header
         initial={{ y: -100, opacity: 0 }}
-        animate={{ 
-          y: visible ? 0 : -100, 
-          opacity: visible ? 1 : 0 
-        }}
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 flex justify-center ${
           scrolled ? 'py-2.5 sm:py-4' : 'py-3.5 sm:py-8'
         }`}
@@ -80,7 +47,7 @@ const Navbar = () => {
         >
           {/* Top specular gloss reflection line for realistic glass sheen */}
           <div 
-            className={`absolute inset-x-12 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none rounded-full transition-opacity duration-500 ${
+            className={`absolute inset-x-6 sm:inset-x-12 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none rounded-full transition-opacity duration-500 ${
               scrolled ? 'opacity-100' : 'opacity-0'
             }`} 
             aria-hidden="true"
